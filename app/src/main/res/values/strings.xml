@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Toshiba TV Remote</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Selfmade Toshiba TV Remote</string>
+    <string name="nav_header_subtitle">remote@hagengruber.dev</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_remote">Remote</string>
+    <string name="menu_slideshow">...</string>
+    <string name="menu_settings">Settings</string>
+    <string name="settings_warning">Settings won\'t change anything yet...</string>
+    <string name="settings_ip">IP-Adress:</string>
+    <string name="settings_ip_edit">192.168.8.114</string>
+</resources>
