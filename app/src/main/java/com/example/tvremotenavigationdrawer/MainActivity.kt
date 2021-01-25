@@ -1,25 +1,47 @@
 package com.example.tvremotenavigationdrawer
 
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.view.KeyEvent
 import android.view.Menu
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.KeyEvent
-import kotlin.concurrent.thread
 import com.example.tvremotenavigationdrawer.ui.home.HomeFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+// import sun.security.krb5.Confounder.bytes
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import kotlin.concurrent.thread
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    fun shouldAskPermissions(): Boolean {
+        return Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1
+    }
+
+    fun askPermissions() {
+        val permissions = arrayOf(
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE"
+        )
+        val requestCode = 200
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, requestCode)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +54,11 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+
+        if (shouldAskPermissions()) {
+            askPermissions();
+        }
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -57,10 +84,10 @@ class MainActivity : AppCompatActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             val s = HomeFragment()
-            thread{ s.doSocket("1017") }
+            thread{ s.doSocket("1017", false) }
         } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             val s = HomeFragment()
-            thread{ s.doSocket("1016") }
+            thread{ s.doSocket("1016", false) }
         }
         return true
     }
@@ -68,12 +95,13 @@ class MainActivity : AppCompatActivity() {
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             val s = HomeFragment()
-            thread{ s.doSocket("1017") }
+            thread{ s.doSocket("1017", false) }
         } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             val s = HomeFragment()
-            thread{ s.doSocket("1016") }
+            thread{ s.doSocket("1016", false) }
         }
         return true
     }
+
 
 }

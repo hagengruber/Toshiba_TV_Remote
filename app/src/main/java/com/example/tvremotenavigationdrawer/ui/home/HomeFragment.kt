@@ -1,16 +1,19 @@
 package com.example.tvremotenavigationdrawer.ui.home
 
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.socket_test.Send_Frame
 import com.example.tvremotenavigationdrawer.R
+import java.io.File
+import java.io.FileInputStream
+import java.lang.IllegalStateException
 import kotlin.concurrent.thread
 
 
@@ -31,6 +34,7 @@ class HomeFragment : Fragment() {
         //homeViewModel.text.observe(viewLifecycleOwner, Observer {
         //    textView.text = it
         //})
+
         return root
     }
 
@@ -44,28 +48,74 @@ class HomeFragment : Fragment() {
             m.setText(s)
         }
 */
-        view.findViewById<ImageButton>(R.id.imagebutton_source).setOnClickListener { thread { doSocket("1056") } }
-        view.findViewById<ImageButton>(R.id.imagebutton_up).setOnClickListener { thread { doSocket("1020") } }
-        view.findViewById<ImageButton>(R.id.imagebutton_down).setOnClickListener { thread { doSocket("1019") } }
-        view.findViewById<ImageButton>(R.id.imagebutton_ok).setOnClickListener { thread { doSocket("1053") } }
-        /*view.findViewById<Button>(R.id.settings_change).setOnClickListener {
 
-            val ip_test = view.findViewById(R.id.ip) as TextView
-            val ip = ip_test.text
-            val textView: TextView = view.findViewById(R.id.home_string_ip) as TextView
-            textView.text = ip
-
-        }*/
+        view.findViewById<ImageButton>(R.id.imagebutton_source).setOnClickListener { thread { doSocket("1056", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_up).setOnClickListener { thread { doSocket("1020", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_down).setOnClickListener { thread { doSocket("1019", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_ok).setOnClickListener { thread { doSocket("1053", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_right).setOnClickListener { thread { doSocket("1022", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_left).setOnClickListener { thread { doSocket("1021", true) } }
 
     }
 
-    fun doSocket(message: String){
+    fun get_ip_address() : String {
 
-        val address = "192.168.8.114"
+        val directory = File(Environment.getExternalStorageDirectory().toString() + File.separator + "tvRemote")
+
+        try {
+            println("\n\n1\n\n")
+
+            println("2/1")
+            if (directory.exists()) {
+
+                val f = File(directory.path + "/" + "data" + ".txt")
+
+                if(f.exists()) {
+                    val t = FileInputStream(directory.path.toString() + "/" + "data" + ".txt")
+                    val line = File(directory.path + "/" + "data" + ".txt").readLines().first()
+                    println("Inhalt:")
+                    println(line)
+                    println("Inhalt Ende")
+                    return line
+                } else {
+                    return ""
+                }
+
+            } else {
+                return ""
+            }
+            println("\n\n2\n\n")
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ""
+        }
+
+    }
+
+    fun doSocket(message: String, send_message : Boolean) : Boolean {
+
+        val ip = get_ip_address()
+        if (ip == "") {
+
+            try {
+                requireActivity().runOnUiThread { Toast.makeText(activity, "Du hast noch keine IP-Adresse angegeben. Bitte überprüfe die Settings", Toast.LENGTH_SHORT).show() }
+            } catch (e : IllegalStateException) {
+                return true
+            }
+
+            return false
+
+        }
+
         val port = 4660
 
         val frame = Send_Frame()
-        frame.run(address, port, message)
+        val text = frame.run(ip, port, message)
+
+        if (send_message && text != "") { requireActivity().runOnUiThread { Toast.makeText(activity, text, Toast.LENGTH_SHORT).show() } }
+
+        return true
 
     }
 
