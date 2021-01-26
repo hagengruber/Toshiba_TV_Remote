@@ -55,6 +55,9 @@ class HomeFragment : Fragment() {
         view.findViewById<ImageButton>(R.id.imagebutton_ok).setOnClickListener { thread { doSocket("1053", true) } }
         view.findViewById<ImageButton>(R.id.imagebutton_right).setOnClickListener { thread { doSocket("1022", true) } }
         view.findViewById<ImageButton>(R.id.imagebutton_left).setOnClickListener { thread { doSocket("1021", true) } }
+        view.findViewById<ImageButton>(R.id.imageButton_setting).setOnClickListener { thread { doSocket("1048", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_back).setOnClickListener { thread { doSocket("1010", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_exit).setOnClickListener { thread { doSocket("1037", true) } }
 
     }
 
