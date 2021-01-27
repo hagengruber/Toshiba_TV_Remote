@@ -49,6 +49,8 @@ class HomeFragment : Fragment() {
         }
 */
 
+        // Click Listener
+        // Send a Message to doSocket() with Ascii Code
         view.findViewById<ImageButton>(R.id.imagebutton_source).setOnClickListener { thread { doSocket("1056", true) } }
         view.findViewById<ImageButton>(R.id.imagebutton_up).setOnClickListener { thread { doSocket("1020", true) } }
         view.findViewById<ImageButton>(R.id.imagebutton_down).setOnClickListener { thread { doSocket("1019", true) } }
@@ -61,61 +63,77 @@ class HomeFragment : Fragment() {
 
     }
 
+    // Returns IP-Adress from data.txt
     fun get_ip_address() : String {
 
+        // Writeable Directory
         val directory = File(Environment.getExternalStorageDirectory().toString() + File.separator + "tvRemote")
 
         try {
-            println("\n\n1\n\n")
 
-            println("2/1")
             if (directory.exists()) {
 
                 val f = File(directory.path + "/" + "data" + ".txt")
 
                 if(f.exists()) {
-                    val t = FileInputStream(directory.path.toString() + "/" + "data" + ".txt")
+
+                    // If both Directory and File exist, return IP
                     val line = File(directory.path + "/" + "data" + ".txt").readLines().first()
-                    println("Inhalt:")
-                    println(line)
-                    println("Inhalt Ende")
                     return line
+
                 } else {
+                    // If File does not exist, return ""
                     return ""
                 }
 
             } else {
+                // If Directory does not exist, return ""
                 return ""
             }
-            println("\n\n2\n\n")
 
         } catch (e: Exception) {
+            // Something wrong :(
             e.printStackTrace()
             return ""
         }
 
     }
 
+    // Calls Send_Frame().run()
+    // Send Frame
     fun doSocket(message: String, send_message : Boolean) : Boolean {
 
+        // Get IP
         val ip = get_ip_address()
+        // If there's no current IP
         if (ip == "") {
 
             try {
+                // MessageBox
+                // ToDO: English Text
                 requireActivity().runOnUiThread { Toast.makeText(activity, "Du hast noch keine IP-Adresse angegeben. Bitte überprüfe die Settings", Toast.LENGTH_SHORT).show() }
             } catch (e : IllegalStateException) {
+                // If MessageBox fales return true
                 return true
             }
 
+            // If MessageBox was successfull, return true
             return false
 
         }
 
+        // Port for TV
         val port = 4660
 
+        // Create Object Send_Frame()
         val frame = Send_Frame()
+        // Send Frame
+        // Returns Message from run()
         val text = frame.run(ip, port, message)
 
+        // If send_message true = Create MessageBox with Error Message from run()
+        // If send_message false = Dont create MessageBox (for audio Button)
+        // If there's a Error Message from run
         if (send_message && text != "") { requireActivity().runOnUiThread { Toast.makeText(activity, text, Toast.LENGTH_SHORT).show() } }
 
         return true

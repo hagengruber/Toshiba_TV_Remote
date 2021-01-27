@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    // If User clicks Volume Down/Up Button send Frame
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             val s = HomeFragment()
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    // If User clicks Volume Down/Up Button send Frame
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             val s = HomeFragment()

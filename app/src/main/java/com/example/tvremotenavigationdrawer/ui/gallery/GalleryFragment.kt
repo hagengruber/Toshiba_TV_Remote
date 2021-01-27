@@ -40,32 +40,38 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ToDo: Code für Einstellungen schreiben
+        // Create Object for IP-Adress
         val s = HomeFragment()
 
+        // Set Text from EditText to current IP
+        // Returns "" or IP in String
         view.findViewById<EditText>(R.id.ip).setText(s.get_ip_address())
 
+        // If Settings changed
         view.findViewById<Button>(R.id.button_change).setOnClickListener {
 
+            // Get writeable Directory
             val directory = File(Environment.getExternalStorageDirectory().toString() + File.separator + "tvRemote")
 
+            // Create Directory if does not exist
             if (!directory.exists()) { directory.mkdir() }
 
+            // Creates File "data.txt" -> stores all data
             val f = File(directory.path + "/" + "data" + ".txt")
-
             if (f.exists()) { f.delete() }
 
+            // Get value of EditText (custom IP-Adress)
             val text = view.findViewById<EditText>(R.id.ip).text.toString()
-            println("Inhalt von EditText:")
-            println(text)
-            println("Inhalt ENDE")
 
+            // Saves Data in File
             f.createNewFile()
             val fo = FileOutputStream(f)
             fo.write(text.toByteArray())
             fo.close()
 
-            requireActivity().runOnUiThread { Toast.makeText(activity, "Einstellungen gespeichert", Toast.LENGTH_SHORT).show() }
+            // Popupbox for Success
+            // ToDo: English text
+            requireActivity().runOnUiThread { Toast.makeText(activity, "Settings saved", Toast.LENGTH_SHORT).show() }
 
         }
 
