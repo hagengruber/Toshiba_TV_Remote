@@ -60,6 +60,14 @@ class HomeFragment : Fragment() {
         view.findViewById<ImageButton>(R.id.imageButton_setting).setOnClickListener { thread { doSocket("1048", true) } }
         view.findViewById<ImageButton>(R.id.imagebutton_back).setOnClickListener { thread { doSocket("1010", true) } }
         view.findViewById<ImageButton>(R.id.imagebutton_exit).setOnClickListener { thread { doSocket("1037", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_red).setOnClickListener { thread { doSocket("1055", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_green).setOnClickListener { thread { doSocket("1054", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_yellow).setOnClickListener { thread { doSocket("1050", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_blue).setOnClickListener { thread { doSocket("1052", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_info).setOnClickListener { thread { doSocket("1018", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_vol_down).setOnClickListener { thread { doSocket("1017", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_vol_up).setOnClickListener { thread { doSocket("1016", true) } }
+        view.findViewById<ImageButton>(R.id.imagebutton_vol_mute).setOnClickListener { thread { doSocket("1013", true) } }
 
     }
 
