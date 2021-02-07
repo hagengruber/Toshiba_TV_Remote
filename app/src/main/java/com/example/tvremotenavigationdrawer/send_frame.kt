@@ -1,21 +1,24 @@
 package com.example.socket_test
 
+import android.widget.ImageButton
+import com.example.tvremotenavigationdrawer.R
 import java.io.OutputStream
 import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.Socket
 import java.nio.charset.Charset
+import kotlin.concurrent.thread
 
 // Class Send_Frame
 class Send_Frame() {
 
     // Function run()
     // Send Frame to IP
-    fun run(address: String, port: Int, message: String) : String {
+    fun send(address: String, port: Int, message: String) : String {
 
         try {
             // Creates new Socket Object
-            val connection: Socket = Socket(address, port)
+            val connection = Socket(address, port)
             // Create new Output Stream
             val writer: OutputStream = connection.getOutputStream()
             // Send Message

@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.tvremotenavigationdrawer.BuildConfig
 import com.example.tvremotenavigationdrawer.R
 import com.example.tvremotenavigationdrawer.ui.home.HomeFragment
 import java.io.File
@@ -40,41 +41,78 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Create Object for IP-Adress
+        // Create Object for IP-Address
         val s = HomeFragment()
 
         // Set Text from EditText to current IP
         // Returns "" or IP in String
         view.findViewById<EditText>(R.id.ip).setText(s.get_ip_address())
+        view.findViewById<EditText>(R.id.port).setText(s.get_port())
 
         // If Settings changed
         view.findViewById<Button>(R.id.button_change).setOnClickListener {
 
-            // Get writeable Directory
-            val directory = File(Environment.getExternalStorageDirectory().toString() + File.separator + "tvRemote")
+            try {
 
-            // Create Directory if does not exist
-            if (!directory.exists()) { directory.mkdir() }
+                // Get writeable Directory
+                val directory = File(Environment.getExternalStorageDirectory().toString() + File.separator + "tvRemote")
 
-            // Creates File "data.txt" -> stores all data
-            val f = File(directory.path + "/" + "data" + ".txt")
-            if (f.exists()) { f.delete() }
+                // Create Directory if does not exist
+                if (!directory.exists()) {
+                    directory.mkdir()
+                }
 
-            // Get value of EditText (custom IP-Adress)
-            val text = view.findViewById<EditText>(R.id.ip).text.toString()
+                val regex = """^(?:[0-9]{1,3}\.){3}[0-9]{1,3}${'$'}""".toRegex()
 
-            // Saves Data in File
-            f.createNewFile()
-            val fo = FileOutputStream(f)
-            fo.write(text.toByteArray())
-            fo.close()
+                if (BuildConfig.DEBUG && !regex.containsMatchIn(view.findViewById<EditText>(R.id.ip).text.toString())) {
+                    requireActivity().runOnUiThread { Toast.makeText(activity, "IP-Address is wrong", Toast.LENGTH_SHORT).show() }
+                } else {
 
-            // Popupbox for Success
-            // ToDo: English text
-            requireActivity().runOnUiThread { Toast.makeText(activity, "Settings saved", Toast.LENGTH_SHORT).show() }
+                    if (control_port(view.findViewById<EditText>(R.id.port).text.toString())) {
+
+                        // Creates File "data.txt" -> stores all data
+                        val f = File(directory.path + "/" + "data" + ".txt")
+                        if (f.exists()) {
+                            f.delete()
+                        }
+
+                        // Get value of EditText (custom IP-Address)
+                        val text = view.findViewById<EditText>(R.id.ip).text.toString() + ";" + view.findViewById<EditText>(R.id.port).text.toString()
+
+                        // Saves Data in File
+                        f.createNewFile()
+                        val fo = FileOutputStream(f)
+                        fo.write(text.toByteArray())
+                        fo.close()
+
+                        // Popupbox for Success
+                        // ToDo: English text
+                        requireActivity().runOnUiThread { Toast.makeText(activity, "Settings saved", Toast.LENGTH_SHORT).show() }
+
+                    } else { requireActivity().runOnUiThread { Toast.makeText(activity, "Port must be a Number", Toast.LENGTH_SHORT).show() } }
+
+                }
+
+            } catch (e : java.io.IOException) {
+                requireActivity().runOnUiThread { Toast.makeText(activity, "Settings not changed... please check permissions", Toast.LENGTH_SHORT).show() }
+            }
 
         }
 
 }
+
+    fun control_port(text : String) : Boolean {
+
+        try {
+            text.toInt()
+            return true
+        } catch (e : java.lang.NumberFormatException) {
+            println("Fehler:")
+            println(e.toString())
+            println("Ende")
+            return false
+        }
+
+    }
 
 }

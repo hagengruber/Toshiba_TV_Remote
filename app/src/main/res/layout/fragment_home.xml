@@ -5,55 +5,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
-    android:background="@color/black">
+    android:background="#383838">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView android:layout_marginTop="30dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView">
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
 
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/button_send"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/round_button_grey"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/smart_home"
+                        android:contentDescription="@string/smart_home_button"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:tint="@color/black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imagebutton_smart_home"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/round_button_grey"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/smart_home"
+                        android:contentDescription="@string/smart_home_button"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"/>
 
                     <ImageButton
                         android:id="@+id/imagebutton_source"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_gravity="end"
                         android:background="@drawable/round_button_grey"
                         android:scaleType="centerInside"
                         android:src="@android:drawable/ic_menu_sort_by_size"
-                        android:layout_gravity="end"/>
+                        android:contentDescription="@string/soure_button"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
 
                     <ImageButton
                         android:id="@+id/imagebutton_up"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/round_button"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
                         android:src="@drawable/upper_arrow"
-                        android:layout_gravity="center"/>
+                        android:contentDescription="@string/arrow_up"
+                        android:rotation="90"
+                        android:tint="@color/white"/>
 
                 </LinearLayout>
 
@@ -61,202 +100,233 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:layout_marginTop="30dp">
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imagebutton_left"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:background="@drawable/round_button"
-                        android:rotation="270"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
-                        android:src="@drawable/upper_arrow"/>
+                        android:src="@drawable/upper_arrow"
+                        android:contentDescription="@string/arrow_left"
+                        android:tint="@color/white"/>
 
                     <ImageButton
                         android:id="@+id/imagebutton_ok"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="170dp"
+                        android:layout_height="170dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:background="@drawable/round_button"
                         android:scaleType="centerInside"
                         android:src="@drawable/bild1"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"/>
+                        app:backgroundTint="#383838"
+                        android:tint="@color/white"
+                        android:contentDescription="@string/ok"/>
 
                     <ImageButton
                         android:id="@+id/imagebutton_right"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:background="@drawable/round_button"
-                        android:rotation="90"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
-                        android:src="@drawable/upper_arrow"/>
+                        android:src="@drawable/upper_arrow"
+                        android:contentDescription="@string/arrow_right"
+                        android:rotation="180"
+                        android:tint="@color/white"/>
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
                     <ImageButton
                         android:id="@+id/imagebutton_down"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/round_button"
-                        android:rotation="180"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
                         android:src="@drawable/upper_arrow"
-                        android:layout_gravity="center"/>
+                        android:contentDescription="@string/arrow_down"
+                        android:rotation="270"
+                        android:tint="@color/white"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="60dp"
                     android:gravity="center"
-                    android:layout_marginTop="60dp">
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imagebutton_vol_mute"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/round_button_grey"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/vol_mute"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
-                        android:tint="@color/white"/>
+                        android:background="@drawable/round_button_grey"
+                        app:backgroundTint="#383838"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/vol_mute"
+                        android:tint="@color/white"
+                        android:contentDescription="@string/mute"/>
 
                     <ImageButton
                         android:id="@+id/imagebutton_vol_down"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/round_button_grey"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/vol_down"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
-                        android:tint="@color/white"/>
+                        android:background="@drawable/round_button_grey"
+                        app:backgroundTint="#383838"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/vol_down"
+                        android:tint="@color/white"
+                        android:contentDescription="@string/volume_down"/>
 
                     <ImageButton
                         android:id="@+id/imagebutton_vol_up"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:background="@drawable/round_button_grey"
-                        android:tint="@color/white"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
                         android:src="@drawable/vol_up"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp" />
+                        android:tint="@color/white"
+                        android:contentDescription="@string/volume_up"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="60dp"
                     android:gravity="center"
-                    android:layout_marginTop="60dp">
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imagebutton_back"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button_grey"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
                         android:src="@drawable/abc_vector_test"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:contentDescription="@string/button_back"/>
 
                     <ImageButton
                         android:id="@+id/imageButton_setting"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button_grey"
-                        android:tint="@color/white"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
                         android:src="@drawable/settings"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:tint="@color/white"
+                        android:contentDescription="@string/button_settings"/>
 
                     <ImageButton
                         android:id="@+id/imagebutton_info"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button_grey"
-                        android:tint="@color/white"
+                        app:backgroundTint="#383838"
                         android:scaleType="centerInside"
                         android:src="@drawable/info"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:tint="@color/white"
+                        android:contentDescription="@string/button_info"/>
 
                     <ImageButton
                         android:id="@+id/imagebutton_exit"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button_grey"
+                        app:backgroundTint="#383838"
                         android:rotation="90"
-                        android:tint="@color/white"
                         android:scaleType="centerInside"
                         android:src="@android:drawable/ic_menu_close_clear_cancel"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:tint="@color/white"
+                        android:contentDescription="@string/button_exit"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="60dp"
                     android:gravity="center"
-                    android:layout_marginTop="60dp">
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imagebutton_red"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button"
-                        android:tint="#ff0000"
                         android:scaleType="centerInside"
                         android:src="@drawable/tv"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:tint="#ff0000"
+                        android:contentDescription="@string/button_red"/>
+
                     <ImageButton
                         android:id="@+id/imagebutton_green"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button"
-                        android:tint="#4B8B3B"
                         android:scaleType="centerInside"
                         android:src="@drawable/tv"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:tint="#4B8B3B"
+                        android:contentDescription="@string/button_green"/>
+
                     <ImageButton
                         android:id="@+id/imagebutton_yellow"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button"
-                        android:tint="#FFFF00"
                         android:scaleType="centerInside"
                         android:src="@drawable/tv"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:tint="#FFFF00"
+                        android:contentDescription="@string/button_yellow"/>
+
                     <ImageButton
                         android:id="@+id/imagebutton_blue"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/round_button"
-                        android:tint="#0000ff"
                         android:scaleType="centerInside"
                         android:src="@drawable/tv"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:tint="#0000ff"
+                        android:contentDescription="@string/button_blue"/>
 
                 </LinearLayout>
 

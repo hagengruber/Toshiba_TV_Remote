@@ -1,10 +1,11 @@
 package com.example.tvremotenavigationdrawer
 
+
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.view.KeyEvent
 import android.view.Menu
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,13 +15,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.tvremotenavigationdrawer.ui.home.HomeFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
-// import sun.security.krb5.Confounder.bytes
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import kotlin.concurrent.thread
 
 
@@ -43,20 +38,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-/*
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-*/
+
         if (shouldAskPermissions()) {
-            askPermissions();
+            askPermissions()
         }
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -104,6 +94,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
 
 }

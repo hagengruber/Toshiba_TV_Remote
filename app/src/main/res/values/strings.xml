@@ -1,21 +1,41 @@
 <resources>
-    <string name="app_name">Toshiba TV Remote</string>
+    <string name="app_name">TV Remote</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Toshiba TV Remote</string>
+    <string name="nav_header_title">TV Remote</string>
     <string name="nav_header_subtitle">remote@hagengruber.dev</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_remote">Remote</string>
-    <string name="menu_slideshow">...</string>
+    <string name="menu_slideshow">&#8230;</string>
     <string name="menu_settings">Configuration</string>
-    <string name="settings_warning">Settings won\'t change anything yet...</string>
-    <string name="settings_ip">IP-Adress:</string>
+    <string name="settings_warning">Settings won\'t change anything yet</string>
+    <string name="settings_ip">IP-Address:</string>
     <string name="settings_ip_edit">error</string>
-    <string name="button_sql">Do shit...</string>
     <string name="button_sql_read">Read from Database</string>
     <string name="button_write">Schreibe Datei</string>
     <string name="textview_ip">R</string>
     <string name="button_change">Change</string>
+    <string name="soure_button">Soure Button</string>
+    <string name="arrow_up">Arrow Up</string>
+    <string name="arrow_left">Arrow Left</string>
+    <string name="ok">OK</string>
+    <string name="arrow_right">Arrow Right</string>
+    <string name="arrow_down">Arrow Down</string>
+    <string name="mute">Mute</string>
+    <string name="volume_down">Volume Down</string>
+    <string name="volume_up">Volume Up</string>
+    <string name="button_back">Button Back</string>
+    <string name="button_settings">Button Settings</string>
+    <string name="button_info">Button Info</string>
+    <string name="button_exit">Button Exit</string>
+    <string name="button_red">Button Red</string>
+    <string name="button_green">Button Green</string>
+    <string name="button_yellow">Button Yellow</string>
+    <string name="button_blue">Button Blue</string>
+    <string name="smart_home_button">Smart Home Button</string>
+    <string name="button_send">Send</string>
+    <string name="ip_address">IP-Address</string>
+    <string name="port">Port</string>
 </resources>
