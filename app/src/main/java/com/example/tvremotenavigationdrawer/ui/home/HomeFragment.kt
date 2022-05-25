@@ -1,11 +1,13 @@
 package com.example.tvremotenavigationdrawer.ui.home
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -38,6 +40,7 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 /*
@@ -49,10 +52,12 @@ class HomeFragment : Fragment() {
         }
 */
 
+        view.findViewById<EditText>(R.id.ip_adress).setText("192.168.1.103");
+
         // Click Listener
         // Send a Message to doSocket() with Ascii Code
         view.findViewById<ImageButton>(R.id.imagebutton_source).setOnClickListener {
-            view.findViewById<Button>(R.id.button_send).setBackgroundColor(Color.WHITE)
+            // view.findViewById<Button>(R.id.button_send).setBackgroundColor(Color.WHITE)
             thread { doSocket("1056", true) }
         }
         view.findViewById<ImageButton>(R.id.imagebutton_up).setOnClickListener {
@@ -150,13 +155,13 @@ class HomeFragment : Fragment() {
 
     fun show_animation() {
 
-        view?.findViewById<ImageButton>(R.id.button_send)?.background?.setTint(Color.WHITE)
+        /*view?.findViewById<ImageButton>(R.id.button_send)?.background?.setTint(Color.WHITE)
 
         Handler(Looper.getMainLooper()).postDelayed(
                 {
                     view?.findViewById<ImageButton>(R.id.button_send)?.background?.setTint(Color.BLACK)
                 }, 300
-        )
+        )*/
 
     }
 
@@ -165,7 +170,12 @@ class HomeFragment : Fragment() {
     fun doSocket(message: String, send_message: Boolean) : Boolean {
 
         // Get IP
-        val ip = get_ip_address()
+        // val ip = get_ip_address()
+        // ToDo: Hier IP ändern
+        // val ip = "192.168.1.103"
+
+        var ip = view?.findViewById<EditText>(R.id.ip_adress)?.text.toString();
+
         // If there's no current IP
         if (ip == "") {
 
@@ -178,12 +188,13 @@ class HomeFragment : Fragment() {
                 return true
             }
 
-            // If MessageBox was successfull, return true
+            // If MessageBox was successful, return true
             return false
 
         }
 
-        val port = get_port()
+        // val port = get_port()
+        val port = "4660"
         if (port == "") {
 
             try {
